@@ -11,5 +11,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        git tag -s -d test
-        git push origin :test
+        git tag -s -a test -m "test"
+        git push origin test
