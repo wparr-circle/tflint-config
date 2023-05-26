@@ -17,10 +17,21 @@ jobs:
       uses: actions/github-script@v6
       with:
         github-token: ${{ github.token }}
-        script: |     
-          github.rest.git.updateRef({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: `tags/test`,
-            sha: context.sha
-          })
+        script: |
+          for (tag in ["test"]) {
+            try {
+                await github.git.deleteRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: "tags/$tag"
+                })
+            } catch (e) {
+              console.log("Tag doesn't exist yet: " + e)
+            }
+            await github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/$tag",
+              sha: context.sha
+            })
+          }
