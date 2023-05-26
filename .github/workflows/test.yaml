@@ -5,6 +5,9 @@ on:
       
 name: test
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
