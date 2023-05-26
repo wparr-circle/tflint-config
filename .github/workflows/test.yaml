@@ -13,8 +13,7 @@ jobs:
     - name: Create Tag
       uses: actions/github-script@v6
       with:
-        script: |
-          const {DIST_VERSION} = process.env          
+        script: |     
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
