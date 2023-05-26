@@ -20,7 +20,7 @@ jobs:
         script: |
           for (tag in ["test"]) {
             try {
-                await github.git.deleteRef({
+                await github.rest.git.deleteRef({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   ref: "tags/$tag"
@@ -28,7 +28,7 @@ jobs:
             } catch (e) {
               console.log("Tag doesn't exist yet: " + e)
             }
-            await github.git.createRef({
+            await github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: "refs/tags/$tag",
