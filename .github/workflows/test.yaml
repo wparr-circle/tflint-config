@@ -23,7 +23,7 @@ jobs:
                 await github.rest.git.deleteRef({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  ref: "tags/$tag"
+                  ref: `tags/$tag`
                 })
             } catch (e) {
               console.log("Tag doesn't exist yet: " + e)
@@ -31,7 +31,7 @@ jobs:
             await github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/$tag",
+              ref: `refs/tags/$tag`,
               sha: context.sha
             })
           }
