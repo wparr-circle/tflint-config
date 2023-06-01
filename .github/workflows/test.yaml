@@ -2,7 +2,10 @@ on:
   push:
     branches:
       - main
-      
+  pull_request_target:
+    branches:
+      - main
+
 name: test
 
 permissions:
@@ -14,6 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Create Tag
+      if: github.event_name == 'push'
       uses: actions/github-script@v6
       with:
         github-token: ${{ github.token }}
